@@ -240,8 +240,8 @@ func run(c *cli.Context) error {
 	plugin := docker.Plugin{
 		Dryrun:  c.Bool("dry-run"),
 		Cleanup: docker.Cleanup {
-			Prune:    c.BoolT("docker.purge") || c.Bool("docker.purge.prune")
-			NamedTag: c.BoolT("docker.purge") || c.Bool("docker.purge.named-tag")
+			Prune:    c.BoolT("docker.purge") || c.Bool("docker.purge.prune"),
+			NamedTag: c.BoolT("docker.purge") || c.Bool("docker.purge.named-tag"),
 		},
 		Login: docker.Login{
 			Registry: c.String("docker.registry"),
