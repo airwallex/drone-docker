@@ -30,6 +30,8 @@ pipeline:
     repo: registry.airwallex.com/drone-docker
     tags:
       - lastest
+      - '17'
+      - 17.12.0
     secrets: [ docker_username, docker_password ]
     dockerfile: docker/Dockerfile
     when:
