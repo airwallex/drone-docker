@@ -121,10 +121,10 @@ func main() {
 			EnvVar: "PLUGIN_CONTEXT",
 		},
 		cli.StringFlag{
-			Name:     "named_tag",
+			Name:     "named.tag",
 			Usage:    "build name:tag",
 			Value:    uuid.Must(uuid.NewV4()).String(),
-			EnvVar:   "PLUGIN_NAME",
+			EnvVar:   "PLUGIN_NAMED_TAG",
 		},
 		cli.StringSliceFlag{
 			Name:     "tags",
@@ -238,7 +238,7 @@ func run(c *cli.Context) error {
 		},
 		Build: docker.Build{
 			Remote:      c.String("remote.url"),
-			Name:        c.String("named_tag"),
+			Name:        c.String("named.tag"),
 			Commit:      c.String("commit.sha"),
 			Dockerfile:  c.String("dockerfile"),
 			Context:     c.String("context"),
