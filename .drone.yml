@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: src/github.com/drone-plugins/drone-docker
+  path: src/github.com/airwallex/drone-docker
 
 pipeline:
   build:
@@ -14,40 +14,24 @@ pipeline:
 
   publish:
     image: plugins/docker
-    repo: plugins/docker
-    tags: [ "latest", "17", "17.12" ]
+    repo: registry.airwallex.com/drone-docker
+    tags:
+      - ${DRONE_REPO_BRANCH//\//-}
+      - ${DRONE_REPO_BRANCH//\//-}-${DRONE_BUILD_NUMBER}
     secrets: [ docker_username, docker_password ]
     dockerfile: docker/Dockerfile
     when:
-      branch: master
+      branch:
+        exclude: [ master ]
       event: push
 
-  publish_heroku:
+  publish:
     image: plugins/docker
-    repo: plugins/heroku
-    tags: [ "latest", "17", "17.12" ]
+    repo: registry.airwallex.com/drone-docker
+    tags:
+      - lastest
     secrets: [ docker_username, docker_password ]
-    dockerfile: docker/heroku/Dockerfile
-    when:
-      branch: master
-      event: push
-
-  publish_gcr:
-    image: plugins/docker
-    repo: plugins/gcr
-    tags: [ "latest", "17", "17.10" ]
-    secrets: [ docker_username, docker_password ]
-    dockerfile: docker/gcr/Dockerfile
-    when:
-      branch: master
-      event: push
-
-  publish_ecr:
-    image: plugins/docker
-    repo: plugins/ecr
-    tags: [ "latest", "17", "17.10" ]
-    secrets: [ docker_username, docker_password ]
-    dockerfile: docker/ecr/Dockerfile
+    dockerfile: docker/Dockerfile
     when:
       branch: master
       event: push
