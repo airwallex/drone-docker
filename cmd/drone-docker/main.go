@@ -206,8 +206,18 @@ func main() {
 		},
 		cli.BoolTFlag{
 			Name:   "docker.purge",
-			Usage:  "docker should cleanup images",
+			Usage:  "docker should cleanup named tag and images",
 			EnvVar: "PLUGIN_PURGE",
+		},
+		cli.BoolFlag{
+			Name:   "docker.purge.prune",
+			Usage:  "docker should cleanup images",
+			EnvVar: "PLUGIN_PURGE_PRUNE",
+		},
+		cli.BoolFlag{
+			Name:   "docker.purge.named-tag",
+			Usage:  "docker should cleanup named tag",
+			EnvVar: "PLUGIN_PURGE_NAMED_TAG",
 		},
 		cli.StringFlag{
 			Name:   "repo.branch",
@@ -229,7 +239,10 @@ func main() {
 func run(c *cli.Context) error {
 	plugin := docker.Plugin{
 		Dryrun:  c.Bool("dry-run"),
-		Cleanup: c.BoolT("docker.purge"),
+		Cleanup: docker.Cleanup {
+			prune:     c.BoolT("docker.purge") || c.Bool("docker.purge.prune")
+			named_tag: c.BoolT("docker.purge") || c.Bool("docker.purge.named-tag")
+		},
 		Login: docker.Login{
 			Registry: c.String("docker.registry"),
 			Username: c.String("docker.username"),

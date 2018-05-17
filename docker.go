@@ -54,13 +54,19 @@ type (
 		NoCache     bool     // Docker build no-cache
 	}
 
+	// Cleanup defines Docker cleanup options
+	Cleanup struct {
+		prune:      bool // Docker system prune -f
+		named_tag:  bool // Docker rmi named_tag
+	}
+
 	// Plugin defines the Docker plugin parameters.
 	Plugin struct {
-		Login   Login  // Docker login configuration
-		Build   Build  // Docker build configuration
-		Daemon  Daemon // Docker daemon configuration
-		Dryrun  bool   // Docker push is skipped
-		Cleanup bool   // Docker purge is enabled
+		Login   Login   // Docker login configuration
+		Build   Build   // Docker build configuration
+		Daemon  Daemon  // Docker daemon configuration
+		Dryrun  bool    // Docker push is skipped
+		Cleanup Cleanup // Docker purge is enabled
 	}
 )
 
@@ -126,8 +132,11 @@ func (p Plugin) Exec() error {
 		}
 	}
 
-	if p.Cleanup {
+	if p.Cleanup.named_tag {
 		cmds = append(cmds, commandRmi(p.Build.Name)) // docker rmi
+	}
+
+	if p.Cleanup.prune {
 		cmds = append(cmds, commandPrune())           // docker system prune -f
 	}
 
