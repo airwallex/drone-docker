@@ -7,6 +7,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli"
+	"github.com/satori/go.uuid"
 
 	"github.com/drone-plugins/drone-docker"
 )
@@ -120,6 +121,12 @@ func main() {
 			EnvVar: "PLUGIN_CONTEXT",
 		},
 		cli.StringSliceFlag{
+			Name:     "named_tag",
+			Usage:    "build name:tag",
+			Value:    uuid.Must(uuid.NewV4()),
+			EnvVar:   "PLUGIN_NAME",
+		},
+		cli.StringSliceFlag{
 			Name:     "tags",
 			Usage:    "build tags",
 			Value:    &cli.StringSlice{"latest"},
@@ -231,7 +238,8 @@ func run(c *cli.Context) error {
 		},
 		Build: docker.Build{
 			Remote:      c.String("remote.url"),
-			Name:        c.String("commit.sha"),
+			Name:        c.String("named_tag"),
+			Commit:      c.String("commit.sha"),
 			Dockerfile:  c.String("dockerfile"),
 			Context:     c.String("context"),
 			Tags:        c.StringSlice("tags"),
