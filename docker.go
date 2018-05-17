@@ -56,8 +56,8 @@ type (
 
 	// Cleanup defines Docker cleanup options
 	Cleanup struct {
-		prune:      bool // Docker system prune
-		named_tag:  bool // Docker rmi named_tag
+		Prune    bool // Docker system prune
+		NamedTag bool // Docker rmi named_tag
 	}
 
 	// Plugin defines the Docker plugin parameters.
@@ -132,11 +132,11 @@ func (p Plugin) Exec() error {
 		}
 	}
 
-	if p.Cleanup.named_tag {
+	if p.Cleanup.NamedTag {
 		cmds = append(cmds, commandRmi(p.Build.Name)) // docker rmi
 	}
 
-	if p.Cleanup.prune {
+	if p.Cleanup.Prune {
 		cmds = append(cmds, commandPrune())           // docker system prune -f
 	}
 
