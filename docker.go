@@ -56,7 +56,7 @@ type (
 
 	// Cleanup defines Docker cleanup options
 	Cleanup struct {
-		prune:      bool // Docker system prune -f
+		prune:      bool // Docker system prune
 		named_tag:  bool // Docker rmi named_tag
 	}
 
