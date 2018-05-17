@@ -12,18 +12,18 @@ pipeline:
       - go test -cover ./...
       - sh .drone.sh
 
-  publish:
-    image: plugins/docker
-    repo: registry.airwallex.com/drone-docker
-    tags:
-      - ${DRONE_REPO_BRANCH//\//-}
-      - ${DRONE_REPO_BRANCH//\//-}-${DRONE_BUILD_NUMBER}
-    secrets: [ docker_username, docker_password ]
-    dockerfile: docker/Dockerfile
-    when:
-      branch:
-        exclude: [ master ]
-      event: push
+  # publish:
+  #   image: plugins/docker
+  #   repo: registry.airwallex.com/drone-docker
+  #   tags:
+  #     - ${DRONE_REPO_BRANCH//\//-}
+  #     - ${DRONE_REPO_BRANCH//\//-}-${DRONE_BUILD_NUMBER}
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: docker/Dockerfile
+  #   when:
+  #     branch:
+  #       exclude: [ master ]
+  #     event: push
 
   publish:
     image: plugins/docker
