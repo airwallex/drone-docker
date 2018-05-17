@@ -47,12 +47,6 @@
   version = "v0.2.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/drone-plugins/drone-docker"
-  packages = ["."]
-  revision = "1e396b3b9cced6e14d9b563e177ecdb21c0174b4"
-
-[[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
   revision = "f280b3ba517bf5fc98922624f21fb0e7a92adaec"
@@ -70,10 +64,10 @@
   version = "v1.2.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/satori/go.uuid"
   packages = ["."]
-  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
-  version = "v1.2.0"
+  revision = "36e9d2ebbde5e3f13ab2e25625fd453271d6522e"
 
 [[projects]]
   branch = "master"
@@ -100,6 +94,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b33da6da8819c7ea6775cfbac3c6956fb78d5598da190103ef16d65a557045eb"
+  inputs-digest = "73029a9e51655e314fe7a834d973f8c6539c9bf4bc46cd71a73d74add20d5e3a"
   solver-name = "gps-cdcl"
   solver-version = 1

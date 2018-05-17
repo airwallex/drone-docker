@@ -9,7 +9,7 @@ import (
 	"github.com/urfave/cli"
 	"github.com/satori/go.uuid"
 
-	"github.com/drone-plugins/drone-docker"
+	"github.com/airwallex/drone-docker"
 )
 
 var build = "0" // build number set at compile-time
@@ -120,10 +120,10 @@ func main() {
 			Value:  ".",
 			EnvVar: "PLUGIN_CONTEXT",
 		},
-		cli.StringSliceFlag{
+		cli.StringFlag{
 			Name:     "named_tag",
 			Usage:    "build name:tag",
-			Value:    uuid.Must(uuid.NewV4()),
+			Value:    uuid.Must(uuid.NewV4()).String(),
 			EnvVar:   "PLUGIN_NAME",
 		},
 		cli.StringSliceFlag{
