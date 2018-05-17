@@ -29,7 +29,7 @@ pipeline:
     image: plugins/docker
     repo: registry.airwallex.com/drone-docker
     tags:
-      - lastest
+      - latest
       - '17'
       - 17.12.0
     secrets: [ docker_username, docker_password ]
